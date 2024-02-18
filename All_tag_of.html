@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: transparent; /* Set background to transparent */
+    }
+
+    #clock {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2); /* Use rgba for transparency */
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .hand {
+      position: absolute;
+      width: 4px;
+      height: 90px;
+      background-color: rgba(52, 152, 219, 0.8); /* Adjust alpha for transparency */
+      top: 50%;
+      left: 50%;
+      transform-origin: 50% 100%;
+      transform: translateX(-50%) translateY(-100%) rotate(0deg);
+      transition: transform 0.5s cubic-bezier(0.4, 2.5, 0.4, 0.5);
+    }
+
+    .dot {
+      width: 16px;
+      height: 16px;
+      background-color: rgba(243, 156, 18, 0.8); /* Adjust alpha for transparency */
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .number {
+      position: absolute;
+      font-size: 12px;
+      font-weight: bold;
+      color: rgba(0, 0, 0, 0.8); /* Adjust alpha for transparency */
+      transform-origin: 50% 100%;
+    }
+
+    .number1 { transform: translate(-50%, -150%); }
+    .number2 { transform: translate(-25%, -125%); }
+    .number3 { transform: translate(0%, -100%); }
+    .number4 { transform: translate(25%, -125%); }
+    .number5 { transform: translate(50%, -150%); }
+    .number6 { transform: translate(50%, 0%); }
+    .number7 { transform: translate(40%, 50%); }
+    .number8 { transform: translateY(70%); }
+    .number9 { transform: translate(-40%, 50%); }
+    .number10 { transform: translate(-50%, 0%); }
+    .number11 { transform: translate(-40%, -75%); }
+    .number12 { transform: translate(0%, -100%); }
+  </style>
+</head>
+<body>
+  <div id="clock">
+    <div class="hand" id="secondHand"></div>
+    <div class="hand" id="minuteHand"></div>
+    <div class="hand" id="hourHand"></div>
+    <div class="dot"></div>
+    <div class="number number1">1</div>
+    <div class="number number2">2</div>
+    <div class="number number3">3</div>
+    <div class="number number4">4</div>
+    <div class="number number5">5</div>
+    <div class="number number6">6</div>
+    <div class="number number7">7</div>
+    <div class="number number8">8</div>
+    <div class="number number9">9</div>
+    <div class="number number10">10</div>
+    <div class="number number11">11</div>
+    <div class="number number12">12</div>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const seconds = now.getSeconds();
+      const minutes = now.getMinutes();
+      const hours = now.getHours() % 12;
+
+      rotateClockHand('secondHand', seconds * 6);
+      rotateClockHand('minuteHand', (minutes * 6) + (seconds / 10));
+      rotateClockHand('hourHand', (hours * 30) + (minutes / 2));
+    }
+
+    function rotateClockHand(handId, degrees) {
+      const hand = document.getElementById(handId);
+      hand.style.transform = `translateX(-50%) translateY(-100%) rotate(${degrees}deg)`;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock(); // Initial update
+  </script>
+</body>
+</html>

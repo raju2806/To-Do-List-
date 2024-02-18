@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Todo List</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Todo List</h1>
+        <div id="clock-container">
+            <div id="clock"></div>
+        </div>
+        <div id="tasks-container">
+            <!-- Task items will be dynamically added here -->
+        </div>
+        <div id="input-container">
+            <input type="text" id="task-input" placeholder="Add a new task">
+            <input type="time" id="alarm-input">
+            <button onclick="addTask()">Add Task</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

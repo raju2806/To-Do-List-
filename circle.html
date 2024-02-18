@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog Clock with Numbers</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        #clock {
+            width: 300px;
+            height: 300px;
+            border: 6px solid #333;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .hand {
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            background-color: #333;
+            top: 50%;
+            transform-origin: 100%;
+            transform: rotate(90deg);
+            transition: transform 0.5s cubic-bezier(0.4, 2.6, 0.2, 0.8);
+        }
+
+        #hour-hand {
+            height: 10px;
+            background-color: #333;
+        }
+
+        #minute-hand {
+            height: 6px;
+            background-color: #333;
+        }
+
+        #second-hand {
+            height: 2px;
+            background-color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="clock">
+        <div id="hour-hand" class="hand"></div>
+        <div id="minute-hand" class="hand"></div>
+        <div id="second-hand" class="hand"></div>
+
+       
+    </div>
+
+    <script>
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours() % 12; // Convert to 12-hour format
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+
+            var hourDegree = (hours * 30) + (0.5 * minutes); // 30 degrees per hour, 0.5 degrees per minute
+            var minuteDegree = (minutes * 6) + (0.1 * seconds); // 6 degrees per minute, 0.1 degrees per second
+            var secondDegree = seconds * 6; // 6 degrees per second
+
+            document.getElementById("hour-hand").style.transform = "rotate(" + hourDegree + "deg)";
+            document.getElementById("minute-hand").style.transform = "rotate(" + minuteDegree + "deg)";
+            document.getElementById("second-hand").style.transform = "rotate(" + secondDegree + "deg)";
+        }
+
+        // Update the clock every second
+        setInterval(updateClock, 1000);
+
+        // Initial call to display the analog clock immediately
+        updateClock();
+    </script>
+</body>
+</html>
